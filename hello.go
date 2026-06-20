@@ -1,19 +1,66 @@
+// NOTES
+
+// MESSAGE WITH COMMAND VAR USING IF ELSE
+/*
+	if command == 1 {
+		fmt.Println("Monitoring")
+	} else if command == 2 {
+		fmt.Println("System initialized and are working fine")
+	} else if command == 3 {
+		fmt.Println("Saindo")
+	} else {
+		fmt.Println("Esta opção não existe")
+	}
+*/
+
 package main
 
 import (
 	"fmt"
-	"reflect"
+	"os"
 )
 
 func main() {
-	fmt.Println("Var Test")
 
-	var name string = "Artur"
-	var age = 18
-	var version float32 = 0.1
+	sayGreeting()
 
-	fmt.Println("\nHello, sr.", name, "you are", age)
+	displayMenu()
+
+	command := readVar()
+
+	switch command {
+	case 1:
+		fmt.Println("Monitoring")
+	case 2:
+		fmt.Println("System initialized and are working fine")
+	case 0:
+		fmt.Println("Exiting")
+		os.Exit(0)
+	default:
+		fmt.Println("Esta opção não existe")
+		os.Exit(-1)
+	}
+
+}
+
+func sayGreeting() {
+	name := "Artur"
+	version := 0.1
+
+	fmt.Println("\nHello, sr.", name)
 	fmt.Println("\nProgram Version", version)
+}
 
-	fmt.Println("Var age type is", reflect.TypeOf(age))
+func readVar() int {
+	var command int
+	fmt.Scan(&command)
+	fmt.Println("Command", command)
+
+	return command
+}
+
+func displayMenu() {
+	fmt.Println("1 - Monitoring System")
+	fmt.Println("2 - Logs")
+	fmt.Println("0 - Exit")
 }
